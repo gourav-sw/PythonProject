@@ -63,33 +63,37 @@ def edit_customer(customers):
     else:
       list_customer(customers)
       which_index = input('\nSelect the index you want to edit or enter blank to go back: ')
-      if which_index == (''):
+      if which_index == '':
         print("\nBlank input, going back...")
         break
       else:
-        which_index = (int(which_index)) - 1
-        if which_index < 0 or which_index >= len(customers):
-          print ('\nInvalid index entered')
-        else:
-          new_name = input('\nEnter new name or enter blank to go back: ')
-          if not new_name:
-            print("\nBlank input, going back...")
-            break
-          new_email = input('\nEnter new email or enter blank to go back: ')
-          if not new_email:
-            print("\nBlank input, going back...")
-            break
-          new_mobile = input("\nEnter new number or enter blank to go back: ")
-          if not new_mobile:
-            print("\nBlank input, going back...")
-            break
-          customers[which_index] = {
-            "name": new_name,
-            "email": new_email,
-            "mobile": new_mobile
+        try:
+          which_index = int(which_index) - 1
+          if which_index < 0 or which_index >= len(customers):
+            print ('\nInvalid index entered')
+          else:
+            new_name = input('\nEnter new name or enter blank to go back: ')
+            if not new_name:
+              print("\nBlank input, going back...")
+              break
+            new_email = input('\nEnter new email or enter blank to go back: ')
+            if not new_email:
+              print("\nBlank input, going back...")
+              break
+            new_mobile = input("\nEnter new number or enter blank to go back: ")
+            if not new_mobile:
+              print("\nBlank input, going back...")
+              break
+            customers[which_index] = {
+              "name": new_name,
+              "email": new_email,
+              "mobile": new_mobile
             }
-          print('\nEdited Succesfully')
-          break
+            print('\nEdited Succesfully')
+            break
+        except ValueError:
+          print("\nInvalid index entered")
+
 
 def remove_customer(customers):
   print('\nRemove a Customer')
@@ -104,13 +108,16 @@ def remove_customer(customers):
         print("\nBlank input, going back...")
         break
       else:
-        which_index = (int(which_index)) - 1
-        if which_index < 0 or which_index >= len(customers):
-          print ('\nInvalid index entered')
-        else:
-          del customers[which_index]
-          print('\nRemoved Succesfully')
-          break
+        try:
+          which_index = int(which_index) - 1
+          if which_index < 0 or which_index >= len(customers):
+            print ('\nInvalid index entered')
+          else:
+            del customers[which_index]
+            print('\nRemoved Succesfully')
+            break
+        except ValueError:
+          print('\nInvalid index entered')
 
 def search_customer(customers):
   while True:
